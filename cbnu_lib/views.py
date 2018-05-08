@@ -17,15 +17,15 @@ def get_string(return_list):
     return string
 
 def keyboard(request):
- 
+
     return JsonResponse({
         'type':'buttons',
         'buttons':['중앙도서관','과기도','편의기능']
     })
- 
+
 @csrf_exempt
 def answer(request):
- 
+
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
     datacontent = received_json_data['content']
@@ -40,9 +40,7 @@ def answer(request):
                     'type':'buttons',
                     'buttons':['1열람실','2열람실','3열람실','뒤로가기']
                 }
- 
             })
- 
     elif datacontent == '과기도':
         crawl = wooyeol.get_crawl("15")
         count = len(crawl)
@@ -56,14 +54,13 @@ def answer(request):
                         'height': 620
                     }
                 },
-	        'keyboard': {
+                'keyboard': {
                     'type':'buttons',
                     'buttons':['중앙도서관','과기도','편의기능']
-                } 
+                }
             })
     elif datacontent == '뒤로가기':
-        crawl = "test"
- 
+        #crawl = "test"
         return JsonResponse({
                 'message': {
                     'text': "장소를 선택해주세요."
@@ -71,7 +68,7 @@ def answer(request):
                 'keyboard': {
                     'type':'buttons',
                     'buttons':['중앙도서관','과기도','편의기능']
-                } 
+                }
             })
     elif datacontent == '편의기능':
         #crawl = "test"
@@ -82,7 +79,7 @@ def answer(request):
                 'keyboard': {
                     'type':'buttons',
                     'buttons':['예약연장 및 반납','뒤로가기']
-                } 
+                }
             })
     elif datacontent == '예약연장 및 반납':
         #crawl = "test"
@@ -98,7 +95,7 @@ def answer(request):
                     'type':'buttons',
                     #'buttons':['예약연장','날씨']
                     'buttons':['중앙도서관','과기도','편의기능']
-                } 
+                }
             })
 #아직구현안함
     elif datacontent == '날씨':
@@ -109,7 +106,7 @@ def answer(request):
                 'keyboard': {
                     'type':'buttons',
                     'buttons':['중앙도서관','과기도','편의기능']
-                } 
+                }
             })
 #고렇다고합니다
     elif datacontent == '1열람실':
@@ -128,7 +125,7 @@ def answer(request):
 	        'keyboard': {
                     'type':'buttons',
                     'buttons':['중앙도서관','과기도','편의기능']
-                } 
+                }
             })
     elif datacontent == '2열람실':
         crawl = wooyeol.get_crawl("2")
